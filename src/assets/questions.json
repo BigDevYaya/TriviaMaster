@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Which boy band included Nick Carter?",
+    "correctAnswer": "Backstreet Boys",
+    "options": [
+      "Boyzone",
+      "NSYNC",
+      "One Direction",
+      "Backstreet Boys"
+    ]
+  },
+  {
+    "question": "What is the popular name for little baked sausages wrapped in rashers of streaky bacon?",
+    "correctAnswer": "Pigs in blankets",
+    "options": [
+      "Little weiners",
+      "Swine rolls",
+      "Porkos",
+      "Pigs in blankets"
+    ]
+  },
+  {
+    "question": "Which Polish astronomer has craters on the moon and Mars named after him?",
+    "correctAnswer": "Copernicus",
+    "options": [
+      "Copernicus",
+      "Hubble",
+      "Galileo",
+      "Kepler"
+    ]
+  },
+  {
+    "question": "In which country is the city of Zagreb?",
+    "correctAnswer": "Croatia",
+    "options": [
+      "Germany",
+      "Croatia",
+      "Luxembourg",
+      "Estonia"
+    ]
+  },
+  {
+    "question": "In phonetics, which of these is an example of a plosive sound?",
+    "correctAnswer": "The t in 'train'",
+    "options": [
+      "The m in 'mother'",
+      "The n in 'no'",
+      "The y in 'yellow'",
+      "The t in 'train'"
+    ]
+  },
+  {
+    "question": "What French word means 'to feel sorry for' and means 'street' in France?",
+    "correctAnswer": "Rue",
+    "options": [
+      "Avenue",
+      "Rue",
+      "Boulevard",
+      "Lane"
+    ]
+  },
+  {
+    "question": "Which actress has appeared in films including Murder on the Orient Express and Counterpart?",
+    "correctAnswer": "Jacqueline Bisset",
+    "options": [
+      "Jacqueline Bisset",
+      "Mila Kunis",
+      "Sophia Loren",
+      "Hilary Duff"
+    ]
+  },
+  {
+    "question": "What is the abbreviation for the polymer that carries genetic instructions for living cells?",
+    "correctAnswer": "DNA",
+    "options": [
+      "DNA",
+      "ATP",
+      "COD",
+      "GCI"
+    ]
+  },
+  {
+    "question": "Which of these quotes is from the film '2001: A Space Odyssey'?",
+    "correctAnswer": "\"Open the pod bay doors, please, HAL.\"",
+    "options": [
+      "\"Forget it, Jake, it's Chinatown.\"",
+      "\"I love lamp.\"",
+      "\"I’m the guy who does his job. You must be the other guy.\"",
+      "\"Open the pod bay doors, please, HAL.\""
+    ]
+  },
+  {
+    "question": "What is the name given to parts of the world where the population lives significantly longer than average?",
+    "correctAnswer": "Blue zones",
+    "options": [
+      "Health spots",
+      "Longevity lands",
+      "Octogenarial regions",
+      "Blue zones"
+    ]
+  }
+]
