@@ -64,9 +64,11 @@ const CountryQuiz = () => {
     })
 
     const [startQuiz, setStartQuiz] = useState(() => {
-      const saved = localStorage.getItem('startQuiz')
+      // const saved = localStorage.getItem('startQuiz')
 
-      return saved ? JSON.parse(saved) : false
+      // return saved ? JSON.parse(saved) : false
+
+      return false
     });
 
     const currentQuestion = questions[currentIndex]
