@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "update-questions": "node src/utils/updateQuestions.js",
-  "dev": "npm run update-questions && react-scripts start",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

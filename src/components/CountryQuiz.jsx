@@ -1,10 +1,34 @@
 import checkImg from '../assets/resources/Check_round_fill.svg'
 import WrongImg from '../assets/resources/Close_round_fill.svg'
-import questions from '../assets/questions.json'
+// import questions from '../assets/questions.json'
 import { useState, useEffect } from 'react'
 
 const CountryQuiz = () => {
   // UseState hooks
+
+    const [questions, setQuestions] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Fetch questions from API
+  const fetchQuestions = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch('https://the-trivia-api.com/v2/questions?limit=10&category=general_knowledge&difficulty=easy');
+      const data = await res.json();
+      const formatted = data.map(q => ({
+        question: q.question.text,
+        correctAnswer: q.correctAnswer,
+        options: [...q.incorrectAnswers, q.correctAnswer].sort(() => Math.random() - 0.5)
+      }));
+      setQuestions(formatted);
+      setStartQuiz(true);
+    } catch (err) {
+      console.error('Failed to fetch questions:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
     const [currentIndex, setCurrentIndex] = useState(() => {
       const saved = localStorage.getItem('currentIndex')
       return saved ? JSON.parse(saved) : 0
@@ -165,7 +189,8 @@ const CountryQuiz = () => {
           </p>
       <button 
       className='px-5 py-3 bg-gradient-to-br from-pink-400 to-violet-400 rounded-xl text-gray-300 cursor-pointer font-bold text-2xl hover:tracking-widest hover:transition-all hover:ease-in-out hover:duration-200 hover:shadow'
-      onClick={() => setStartQuiz(true)}>Start Quiz</button> 
+      onClick={fetchQuestions}
+      disabled={isLoading}>{isLoading ? 'Loading...' : 'Start Quiz'}</button> 
     </div>
     :
     <div className='flex flex-col text-gray-200 ld:w-2/3 font-bold text-xl items-center w-3/4'>
