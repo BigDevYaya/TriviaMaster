@@ -22,6 +22,7 @@ const CountryQuiz = () => {
       }));
       setQuestions(formatted);
       setStartQuiz(true);
+      localStorage.clear()
     } catch (err) {
       console.error('Failed to fetch questions:', err);
     } finally {
