@@ -1,11 +1,13 @@
 // import ParentContainer from "./components/ParentContainer"
 import CountryQuiz from "./components/CountryQuiz"
+import { Toaster } from "react-hot-toast"
 
 
 function App() {
 
   return (
-   <div className="md:bg-[url('./assets/resources/bg.jpg')] bg-[url('./assets/resources/bg-sm.jpg')] bg-cover bg-center h-screen flex items-center justify-center">
+   <div className="bg-blue-950 min-h-screen flex items-center justify-center">
+    <Toaster position="top-center" reverseOrder={false} />
     <CountryQuiz />
    </div>
   )

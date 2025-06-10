@@ -1,6 +1,7 @@
 import checkImg from '../assets/resources/Check_round_fill.svg'
 import WrongImg from '../assets/resources/Close_round_fill.svg'
 // import questions from '../assets/questions.json'
+import toast from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 
 const CountryQuiz = () => {
@@ -11,65 +12,70 @@ const CountryQuiz = () => {
 
     // Fetch questions from API
   const fetchQuestions = async () => {
+    console.log('fetching questions.....')
     setIsLoading(true);
     try {
       const res = await fetch('https://the-trivia-api.com/v2/questions?limit=10&category=general_knowledge&difficulty=easy');
+      if (!res.ok){
+        throw new Error(`HTTP error! status: ${res.status}`)
+      }
       const data = await res.json();
+      console.log('Raw data: ', data)
       const formatted = data.map(q => ({
         question: q.question.text,
         correctAnswer: q.correctAnswer,
         options: [...q.incorrectAnswers, q.correctAnswer].sort(() => Math.random() - 0.5)
       }));
+      console.log('Formatted data: ', formatted)
       setQuestions(formatted);
       setStartQuiz(true);
-      localStorage.clear()
     } catch (err) {
       console.error('Failed to fetch questions:', err);
+      toast.error('Failed to fetch questions. Check your internet connection')
     } finally {
       setIsLoading(false);
     }
   };
 
     const [currentIndex, setCurrentIndex] = useState(() => {
-      const saved = localStorage.getItem('currentIndex')
+      const saved = sessionStorage.getItem('currentIndex')
       return saved ? JSON.parse(saved) : 0
 
       // return 0
     });
     const [selectedOption, setSelectedOption] = useState(() => {
-      const saved = localStorage.getItem('selectedOption')
+      const saved = sessionStorage.getItem('selectedOption')
 
       return saved ? JSON.parse(saved) : null
 
       // return null
     });
     const [showAnswer, setShowAnswer] = useState(() => {
-      const saved = localStorage.getItem('showAnswer')
+      const saved = sessionStorage.getItem('showAnswer')
       return saved ? JSON.parse(saved) : false
 
       // return false
     });
     const [score, setScore] = useState(
       () => {
-        const saved = localStorage.getItem('score')
+        const saved = sessionStorage.getItem('score')
         return saved ? JSON.parse(saved) : 0
 
         // return 0
       }
     )
     const [answeredQuestions, setAnsweredQuestions] = useState(() => {
-      const saved = localStorage.getItem('answeredQuestions')
+      const saved = sessionStorage.getItem('answeredQuestions')
 
       return saved ? JSON.parse(saved) : {}
       // return {}
     })
 
     const [startQuiz, setStartQuiz] = useState(() => {
-      // const saved = localStorage.getItem('startQuiz')
+      const saved = sessionStorage.getItem('startQuiz')
 
-      // return saved ? JSON.parse(saved) : false
+      return saved ? JSON.parse(saved) : false
 
-      return false
     });
 
     const currentQuestion = questions[currentIndex]
@@ -86,7 +92,7 @@ const CountryQuiz = () => {
     setScore(0)
     setAnsweredQuestions({})
     setStartQuiz(false)
-    localStorage.clear()
+    sessionStorage.clear()
   }
 
     function handleOptionClick(option) {
@@ -133,17 +139,17 @@ const CountryQuiz = () => {
     // Useeffects
 
     useEffect(() => {
-      localStorage.setItem('currentIndex', JSON.stringify(currentIndex))
+      sessionStorage.setItem('currentIndex', JSON.stringify(currentIndex))
 
-      localStorage.setItem('score', JSON.stringify(score))
+      sessionStorage.setItem('score', JSON.stringify(score))
 
-      localStorage.setItem('showAnswer', JSON.stringify(showAnswer))
+      sessionStorage.setItem('showAnswer', JSON.stringify(showAnswer))
 
-      localStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions))
+      sessionStorage.setItem('answeredQuestions', JSON.stringify(answeredQuestions))
 
-      localStorage.setItem('selectedOption', JSON.stringify(selectedOption))
+      sessionStorage.setItem('selectedOption', JSON.stringify(selectedOption))
 
-      localStorage.setItem('startQuiz', JSON.stringify(startQuiz))
+      sessionStorage.setItem('startQuiz', JSON.stringify(startQuiz))
     }, [
       currentIndex,
       score,
@@ -205,7 +211,7 @@ const CountryQuiz = () => {
               Trivia Master
             </h2>
             <div className="flex items-center gap-4">
-              <p className='bg-gradient-to-r from-pink-400 to-violet-400 px-4 py-2 text-sm md:text-xl rounded-full text-white'>
+              <p className='bg-gradient-to-r from-pink-400 to-violet-400 px-4 py-2 text-sm md:text-xl rounded-full text-white animate-pulse'>
                 🏆 {score} / {questions.length}
               </p>
               {isQuizComplete && (
@@ -221,7 +227,7 @@ const CountryQuiz = () => {
 
         {/* Questions and answer Container */}
 
-        <div className='grid grid-cols-1 place-items-center my-6 bg-gray-400/10 lg:py-12 lg:px-16 md:py-10 md:px-12 px-6 py-8 rounded-2xl gap-6 mx-auto w-full overflow-hidden'>
+        <div className='grid grid-cols-1 place-items-center my-6 bg-gray-400/10 lg:py-12 lg:px-16 md:py-10 md:px-12 px-6 py-8 rounded-2xl gap-6 mx-auto w-full overflow-hidden animate-slideLeft'>
         {/* Questions dots container */}
             <ul className='flex justify-center mb-6 items-center gap-2 flex-wrap'>
           {questions.map((_, idx) => (
@@ -246,7 +252,7 @@ const CountryQuiz = () => {
         </ul>
 
 
-            <p>{currentQuestion.question}</p>
+            <p className='transition-all duration-300 ease-in'>{currentQuestion.question}</p>
             <ul className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 w-full max-w-2xl'>
         {currentQuestion.options.map((opt, i) => {
             let bg = 'bg-gray-800'
