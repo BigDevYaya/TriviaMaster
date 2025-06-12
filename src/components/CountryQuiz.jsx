@@ -37,6 +37,8 @@ const CountryQuiz = () => {
     }
   };
 
+  
+
     const [currentIndex, setCurrentIndex] = useState(() => {
       const saved = sessionStorage.getItem('currentIndex')
       return saved ? JSON.parse(saved) : 0
